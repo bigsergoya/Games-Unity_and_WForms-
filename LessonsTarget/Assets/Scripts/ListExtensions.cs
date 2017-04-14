@@ -10,6 +10,13 @@ namespace Assets.Scripts
         /// <summary>
         /// Shuffles the element order of the specified list.
         /// </summary>
+        /// 
+        public static T PopAt<T>(this List<T> list, int index)
+        {
+            T r = list[index];
+            list.RemoveAt(index);
+            return r;
+        }
         public static void Shuffle<T>(this IList<T> ts)
         {
             var count = ts.Count;

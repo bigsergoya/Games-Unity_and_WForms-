@@ -12,5 +12,9 @@ namespace Assets.Scripts.Loaders
         {
             return Instantiate(Resources.Load("SimpleBomb", typeof(GameObject))) as GameObject;
         }
+        public static GameObject GetHardBomb() //Костыль. Лучше бы иначе!
+        {
+            return Instantiate(Resources.Load("HardBomb", typeof(GameObject))) as GameObject;
+        }
     }
 }

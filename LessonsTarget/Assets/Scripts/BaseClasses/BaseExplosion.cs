@@ -48,6 +48,7 @@ namespace Assets.Scripts.BaseClasses
                 //explosion.time = 3f;
                 var x = ob.main;
                 x.startDelay = explosionTimer;
+                x.startSpeed = explosionRadius;
                 ob.Play();
                 //sss.startDelay = 1f;
             }

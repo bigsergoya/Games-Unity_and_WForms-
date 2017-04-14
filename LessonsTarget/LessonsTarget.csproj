@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.5.2f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -83,8 +81,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Bonus_BombRadius_Controller.cs" />
+    <Compile Include="Assets\CBoyController.cs" />
+    <Compile Include="Assets\CowBoyModelController.cs" />
     <Compile Include="Assets\ExplosionController.cs" />
+    <Compile Include="Assets\HardBombController.cs" />
     <Compile Include="Assets\SampleScenes\Menu\Scripts\MenuSceneLoader.cs" />
     <Compile Include="Assets\SampleScenes\Menu\Scripts\PauseMenu.cs" />
     <Compile Include="Assets\SampleScenes\Menu\Scripts\SceneAndURLLoader.cs" />
@@ -93,6 +93,7 @@
     <Compile Include="Assets\SampleScenes\Scripts\ParticleSceneControls.cs" />
     <Compile Include="Assets\SampleScenes\Scripts\PlaceTargetWithMouse.cs" />
     <Compile Include="Assets\SampleScenes\Scripts\SlowMoButton.cs" />
+    <Compile Include="Assets\Scripts\ActiveObjects\CleverEnemy.cs" />
     <Compile Include="Assets\Scripts\ActiveObjects\Player.cs" />
     <Compile Include="Assets\Scripts\ActiveObjects\SimpleEnemy.cs" />
     <Compile Include="Assets\Scripts\BaseClasses\BaseActiveModels.cs" />
@@ -100,10 +101,17 @@
     <Compile Include="Assets\Scripts\BaseClasses\BaseBonus.cs" />
     <Compile Include="Assets\Scripts\BaseClasses\BaseEnemy.cs" />
     <Compile Include="Assets\Scripts\BaseClasses\BaseExplosion.cs" />
+    <Compile Include="Assets\Scripts\Bonuses\BonusBombCount.cs" />
+    <Compile Include="Assets\Scripts\Bonuses\BonusBombRadius.cs" />
+    <Compile Include="Assets\Scripts\Bonuses\BonusNoClip.cs" />
+    <Compile Include="Assets\Scripts\Bonuses\BonusSpeed.cs" />
     <Compile Include="Assets\Scripts\Controllers\BombController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\Bonus_BombCountController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\Bonus_BombRadius_Controller.cs" />
+    <Compile Include="Assets\Scripts\Controllers\Bonus_NoClipController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\Bonus_SpeedController.cs" />
     <Compile Include="Assets\Scripts\Controllers\EnemyController.cs" />
     <Compile Include="Assets\Scripts\Controllers\PlayerController.cs" />
-    <Compile Include="Assets\Scripts\Field.cs" />
     <Compile Include="Assets\Scripts\FieldGenerator.cs" />
     <Compile Include="Assets\Scripts\ListExtensions.cs" />
     <Compile Include="Assets\Scripts\Loaders\BombLoader.cs" />
@@ -112,9 +120,11 @@
     <Compile Include="Assets\Scripts\Loaders\ParticleSystemLoader.cs" />
     <Compile Include="Assets\Scripts\Loaders\PlayerLoader.cs" />
     <Compile Include="Assets\Scripts\Loaders\ResourcesLoader.cs" />
-    <Compile Include="Assets\Scripts\PassiveObjects\BonusBombRadius.cs" />
     <Compile Include="Assets\Scripts\PassiveObjects\ExplosionMechanic.cs" />
+    <Compile Include="Assets\Scripts\PassiveObjects\Field.cs" />
+    <Compile Include="Assets\Scripts\PassiveObjects\HardBomb.cs" />
     <Compile Include="Assets\Scripts\PassiveObjects\SimpleBomb.cs" />
+    <Compile Include="Assets\Scripts\PositionClasses\Position.cs" />
     <Compile Include="Assets\Scripts\Square.cs" />
   </ItemGroup>
   <ItemGroup>

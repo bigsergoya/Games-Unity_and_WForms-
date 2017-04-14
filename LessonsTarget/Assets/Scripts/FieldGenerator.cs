@@ -8,7 +8,9 @@ public class FieldGenerator : MonoBehaviour {
     public int fieldSize;
     public int countOfBreakingWalls;
     private Assets.Scripts.Player player;
-	void Start () {
+    //Player player;
+
+    void Start () {
         Assets.Field field = new Assets.Field(fieldSize, countOfBreakingWalls);
         field.Create();
         player = field.Player;

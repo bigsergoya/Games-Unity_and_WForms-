@@ -9,8 +9,14 @@ using UnityEngine;
 
 namespace Assets.Scripts
 {
-    class Player : BaseActiveModels
+    public class Player : BaseActiveModels
     {
+        float currentSpeed;
+        int bombCount;  //10 max
+        //int placedBombs;
+        bool isNoClip;  
+        bool bombPower; //6 max
+        
 
         protected override void CreateModel(float i, float j)
         {
@@ -21,17 +27,49 @@ namespace Assets.Scripts
         {
             CreateModel(i, j);
             isMoving = false;
+            
         }
         protected void PlaceBomb(float i, float j)
         {
-            GameObject gameModelsObject = BombLoader.GetSimpleBomb();
-            gameModelsObject.transform.position = new Vector3(i, 1.0f, j);
+            if (GameObject.FindGameObjectsWithTag("Bomb").Length < bombCount)
+            { //Ставится три бомбы, нужно найти баг
+                GameObject gameModelsObject;
+                if (!bombPower) { 
+                    gameModelsObject = BombLoader.GetSimpleBomb();
+                }
+                else
+                    gameModelsObject = BombLoader.GetHardBomb();
+                gameModelsObject.transform.position = new Vector3(i, 1.0f, j);
+            }
 
         }
         private void Start()
         {
             isMoving = false;
+            currentSpeed = 1.5f ;
+            bombCount = 1;  //10 max
+            isNoClip = false;
+            bombPower = false; //6 max
         }
+        protected override bool IsCollisionWithWallOrCube(Vector3 transformPositions, Vector3 targetPositions)
+        {
+            RaycastHit hit;
+            if (Physics.Linecast(transformPositions, targetPositions, out hit))
+            {
+                if ((hit.collider.gameObject.tag == "UnbreakingCube") ||
+                    ((hit.collider.gameObject.tag == "BreakingCube")&&(!isNoClip)))
+                {
+                    //print("No way man!");
+                    return true;
+                    //CollisionWithGameObject();
+                }
+
+            }
+            return false;
+        }
+
+
+
         private bool CanExecute()
         {
             if (isMoving)
@@ -41,79 +79,25 @@ namespace Assets.Scripts
 
             if (Input.GetKey(KeyCode.UpArrow))
             {
-                /*targetPosition = SetTargetPosition(transform.position, Vector3.forward);
-                if (!IsCollisionWithWallOrCube(transform.position, targetPosition))
-                {
-                    TurnFace(directionType.Forward);
-                    return true;
-                }
-                return false;*/
                 return SetTargetPositionAndCheckCollisions(Vector3.forward, directionType.Forward);
             }
             if (Input.GetKey(KeyCode.LeftArrow))
             {
-                /*targetPosition = SetTargetPosition(transform.position, Vector3.left);
-                if (!IsCollisionWithWallOrCube(transform.position, targetPosition))
-                {
-                    TurnFace(directionType.Left);
-                    return true;
-                }
-                return false;*/
                 return SetTargetPositionAndCheckCollisions(Vector3.left, directionType.Left);
             }
             if (Input.GetKey(KeyCode.RightArrow))
             {
-                /*targetPosition = SetTargetPosition(transform.position, Vector3.right);
-                if (!IsCollisionWithWallOrCube(transform.position, targetPosition))
-                {
-                    TurnFace(directionType.Right);
-                    return true;
-                }
-                return false;*/
                 return SetTargetPositionAndCheckCollisions(Vector3.right, directionType.Right);
             }
             if (Input.GetKey(KeyCode.DownArrow))
             {
-                /*targetPosition = SetTargetPosition(transform.position, Vector3.back);
-                if (!IsCollisionWithWallOrCube(transform.position, targetPosition))
-                {
-                    TurnFace(directionType.Reverse);
-                    return true;
-                }
-                return false;*/
                 return SetTargetPositionAndCheckCollisions(Vector3.back, directionType.Reverse);
             }
-            if (Input.GetKey(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                PlaceBomb(transform.position.x, transform.position.z);
+                    PlaceBomb(transform.position.x, transform.position.z);
             }
             return false;
-        }
-
-        private bool CollisionsChecker(Vector3 transformPositions, Vector3 targetPositions)
-        {
-            RaycastHit hit;
-            if (Physics.Linecast(transformPositions, targetPositions, out hit))
-            {
-                if (hit.collider.gameObject.tag == "Enemy")
-                {
-                    //print("U dead...");
-                    CollisionWithGameObject();
-                }
-                if (hit.collider.gameObject.tag == "Bonus")
-                {
-                    //print("Take this bonus, dude");
-                    CollisionWithBonus();
-                }
-                /*if ((hit.collider.gameObject.tag == "UnbreakingCube") || (hit.collider.gameObject.tag == "BreakingCube"))
-                {
-                    print("Stooop!");
-                    CollisionWithGameObject();
-                }*/
-                return false;
-            }
-            else
-                return true;
         }
         private void CollisionWithGameObject()
         {
@@ -144,8 +128,8 @@ namespace Assets.Scripts
              //print(" 1 " + transform.position.z);
              Camera.main.transform.position = Vector3.MoveTowards(
                  Camera.main.transform.position,
-                 new Vector3(transform.position.x,15f,transform.position.z), 
-                 1.5f * Time.deltaTime);
+                 new Vector3(transform.position.x,15f,transform.position.z),
+                 currentSpeed * Time.deltaTime);
             if (transform.position == targetPosition)
              {
                  isMoving = false;
@@ -156,8 +140,26 @@ namespace Assets.Scripts
         }
         private void OnTriggerEnter(Collider other)
         {
-            if (other.tag == "Enemy") { 
-                Destroy(this.gameObject);
+            switch (other.tag)
+            {
+                case "Enemy":
+                    Destroy(this.gameObject);
+                    break;
+                case "Bonus_Radius":
+                    //bombCount = (bombCount <= 10) ? ++bombCount : 10;
+                    bombPower = true;
+                    break;
+                case "Bonus_Speed":
+                    currentSpeed = 3.5f;
+                    break;
+                case "Bonus_NoClip":
+                    isNoClip = true;
+                    break;
+                case "Bonus_BombCount":
+                    bombCount = (bombCount <= 6) ? bombCount+1 : 6;
+                    break;
+                default:
+                    break;
             }
         }
 

@@ -15,5 +15,12 @@ namespace Assets.Scripts.BaseClasses
         {
             transform.Rotate(Vector3.up*20*Time.deltaTime);
         }
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.tag == "Player")
+            {
+                Destroy(this.gameObject);
+            }
+        }
     }
 }

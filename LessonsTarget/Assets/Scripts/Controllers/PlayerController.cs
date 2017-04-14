@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour {
     //Vector3 endPos;
 
     void Start () {
-        curPlayer = gameObject.AddComponent<Player>();
+        //curPlayer = gameObject.AddComponent<Player>();
         curCam = gameObject.GetComponent("Main Camera") as Camera;
        // Camera.main.transform.
     }

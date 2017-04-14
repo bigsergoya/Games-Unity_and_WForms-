@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Assets.Scripts
 {
-    abstract class BaseActiveModels: MonoBehaviour
+    public abstract class BaseActiveModels: MonoBehaviour
     {
         protected Vector3 targetPosition;
         protected enum directionType { Forward, Reverse, Left, Right };
@@ -17,7 +17,7 @@ namespace Assets.Scripts
         //public abstract bool CanExecute();
 
 
-        protected bool IsCollisionWithWallOrCube(Vector3 transformPositions, Vector3 targetPositions)
+        protected virtual bool IsCollisionWithWallOrCube(Vector3 transformPositions, Vector3 targetPositions)
         {
             RaycastHit hit;
             if (Physics.Linecast(transformPositions, targetPositions, out hit))

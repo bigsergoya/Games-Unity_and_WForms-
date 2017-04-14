@@ -10,7 +10,7 @@ namespace Assets.Scripts.Loaders
     {
         public static GameObject GetPlayerPrefab() //А можно ли статик юзать в абстрактном классе?
         {
-            return Instantiate(Resources.Load("AngryPlayer", typeof(GameObject))) as GameObject;
+            return Instantiate(Resources.Load("CowBoy", typeof(GameObject))) as GameObject;
         }
     }
 }
