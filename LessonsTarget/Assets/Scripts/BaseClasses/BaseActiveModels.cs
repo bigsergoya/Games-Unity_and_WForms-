@@ -13,7 +13,12 @@ namespace Assets.Scripts
         protected enum directionType { Forward, Reverse, Left, Right };
         protected directionType direction;
         protected bool isMoving;
-
+        protected Animator animationController;
+        protected bool banMoving;
+        public AudioClip stepSound;
+        public AudioClip dieSound;
+        protected AudioSource source;
+        protected const float soundVolume = 0.5f;
         //public abstract bool CanExecute();
 
 
@@ -27,18 +32,16 @@ namespace Assets.Scripts
                 {
                     //print("No way man!");
                     return true;
-                    //CollisionWithGameObject();
                 }
                 
             }
             return false;
             
         }
-        /*protected void Start()
+        protected void PlayStepSound()
         {
-            isMoving = false;
-            rnd = new System.Random();
-        }*/
+            source.PlayOneShot(stepSound, soundVolume);
+        }
         protected bool SetTargetPositionAndCheckCollisions(Vector3 direction, directionType dirType)
         {
             targetPosition = SetTargetPosition(transform.position, direction);

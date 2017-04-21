@@ -13,26 +13,26 @@ namespace Assets.Scripts
     {
         float currentSpeed;
         int bombCount;  //10 max
-        //int placedBombs;
         bool isNoClip;  
         bool bombPower; //6 max
-        
+        public AudioClip bonusCollideSound;
+        Camera curCam;
 
         protected override void CreateModel(float i, float j)
         {
             GameObject gameModelsObject = PlayerLoader.GetPlayerPrefab();
-            gameModelsObject.transform.position = new Vector3(i, 1.0f, j);
+            gameModelsObject.transform.position = new Vector3(i, 0.5f, j);
         }
         public Player(float i, float j)
         {
             CreateModel(i, j);
             isMoving = false;
-            
+            banMoving = false;
         }
         protected void PlaceBomb(float i, float j)
         {
             if (GameObject.FindGameObjectsWithTag("Bomb").Length < bombCount)
-            { //Ставится три бомбы, нужно найти баг
+            { 
                 GameObject gameModelsObject;
                 if (!bombPower) { 
                     gameModelsObject = BombLoader.GetSimpleBomb();
@@ -40,16 +40,21 @@ namespace Assets.Scripts
                 else
                     gameModelsObject = BombLoader.GetHardBomb();
                 gameModelsObject.transform.position = new Vector3(i, 1.0f, j);
+                animationController.SetTrigger("PlantABomb");
             }
 
         }
         private void Start()
         {
+            curCam = gameObject.GetComponent("Main Camera") as Camera;
             isMoving = false;
             currentSpeed = 1.5f ;
             bombCount = 1;  //10 max
             isNoClip = false;
             bombPower = false; //6 max
+            animationController = GetComponent<Animator>();
+            banMoving = false;
+            source = gameObject.GetComponentInChildren<AudioSource>();
         }
         protected override bool IsCollisionWithWallOrCube(Vector3 transformPositions, Vector3 targetPositions)
         {
@@ -59,9 +64,7 @@ namespace Assets.Scripts
                 if ((hit.collider.gameObject.tag == "UnbreakingCube") ||
                     ((hit.collider.gameObject.tag == "BreakingCube")&&(!isNoClip)))
                 {
-                    //print("No way man!");
                     return true;
-                    //CollisionWithGameObject();
                 }
 
             }
@@ -72,13 +75,17 @@ namespace Assets.Scripts
 
         private bool CanExecute()
         {
-            if (isMoving)
+            if (banMoving)
             {
+                return false;
+            }
+            if (isMoving)
+            {                
                 return true;
             }
 
             if (Input.GetKey(KeyCode.UpArrow))
-            {
+            {                
                 return SetTargetPositionAndCheckCollisions(Vector3.forward, directionType.Forward);
             }
             if (Input.GetKey(KeyCode.LeftArrow))
@@ -95,17 +102,11 @@ namespace Assets.Scripts
             }
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                    PlaceBomb(transform.position.x, transform.position.z);
+                //PlaceBomb(transform.position.x, transform.position.z);
+                BanAnyMovement();
+                animationController.SetTrigger("PlantABomb");                
             }
             return false;
-        }
-        private void CollisionWithGameObject()
-        {
-            //Comming Soon
-        }
-        private void CollisionWithBonus()
-        {
-            //Comming Soon
         }
         private void Execute()
         {
@@ -115,6 +116,7 @@ namespace Assets.Scripts
         void Update()
         {
             if (CanExecute()) {
+                animationController.SetFloat("Speed", 1);
                 Execute();
             }
         }
@@ -133,29 +135,63 @@ namespace Assets.Scripts
             if (transform.position == targetPosition)
              {
                  isMoving = false;
-                 //print(" 2 ");
-             }
+                 animationController.SetFloat("Speed", 0);
+            }
              yield return new WaitForEndOfFrame();  //или Нуль, подумать.
                                                     //yield return null;
         }
+        void PutBombAndPlaySound()
+        {
+            PlaceBomb(transform.position.x, transform.position.z);
+        }
+        void BanAnyMovement()
+        {
+            banMoving = true; //Доп флаговую переменную или переименовать эту
+            print("All movement is ban");
+        }
+        void AvoidAnyMovement()
+        {
+            banMoving = false;
+            animationController.ResetTrigger("PlantABomb");
+            print("All movement is avoid");
+        }
+        void becomeDead()
+        {
+            animationController.SetTrigger("BecomeDead");
+            print("Player OnParticleCollision");
+            BanAnyMovement();
+            source.PlayOneShot(dieSound, soundVolume);
+
+            var colChildren = gameObject.GetComponentsInChildren<Collider>();
+            foreach (Collider collider in colChildren)
+            {
+                collider.enabled = false;
+            }
+        }
         private void OnTriggerEnter(Collider other)
         {
+            print("Player OnTriggerEnter");
             switch (other.tag)
             {
                 case "Enemy":
-                    Destroy(this.gameObject);
+                    //Destroy(this.gameObject);
+                    becomeDead();
                     break;
                 case "Bonus_Radius":
+                    source.PlayOneShot(bonusCollideSound, soundVolume); 
                     //bombCount = (bombCount <= 10) ? ++bombCount : 10;
                     bombPower = true;
                     break;
                 case "Bonus_Speed":
+                    source.PlayOneShot(bonusCollideSound, soundVolume);
                     currentSpeed = 3.5f;
                     break;
                 case "Bonus_NoClip":
+                    source.PlayOneShot(bonusCollideSound, soundVolume);
                     isNoClip = true;
                     break;
                 case "Bonus_BombCount":
+                    source.PlayOneShot(bonusCollideSound, soundVolume);
                     bombCount = (bombCount <= 6) ? bombCount+1 : 6;
                     break;
                 default:
@@ -165,12 +201,11 @@ namespace Assets.Scripts
 
         private void OnParticleCollision(GameObject other)
         {
-            print("Player OnParticleCollision");
-        //    BaseExplosion.PlayerDestroyEvent(transform.position);
+            becomeDead();
         }
         protected override void OnDestroy()
         {
-            //BaseExplosion.PlayerDestroyEvent(transform.position); 
+            becomeDead();
         }
     }
 }

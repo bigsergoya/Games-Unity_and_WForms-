@@ -11,42 +11,29 @@ namespace Assets.Scripts.PassiveObjects
 {
     class ExplosionMechanic : MonoBehaviour
     {
-        float explosionRadius = 1;
-        private bool m_Exploded;
-        bool reset = true;
-        private ObjectResetter m_ObjectResetter;
-        public float resetTimeDelay = 10;
 
         private void Start()
         {
             
         }
-        bool ObjectCanBeBreaked(string tag)
+        bool ObjectCanBeExploded(string tag)
         {
-            return ((tag != "UnbreakingCube") && (tag != "FieldCell"));
+            return ((tag != "UnbreakingCube") 
+                && (tag != "FieldCell") 
+                    && (tag != "Player")
+                        && (tag != "Enemy")
+                            && (tag != "Bomb"));
         }
         private IEnumerator OnParticleCollision(GameObject otherObject)
         {
             //print("Hit");
             if (enabled)
-                if (ObjectCanBeBreaked(otherObject.tag))
+                if (ObjectCanBeExploded(otherObject.tag))
                 {
                     BaseExplosion.ObjectDestroyEvent(otherObject.transform.position);
                     Destroy(otherObject.gameObject);
-                    //if (reset)
-                    //{
-                        //m_ObjectResetter.DelayedReset(resetTimeDelay);
-                    //}
                 }
             yield return null;
-        }
-        //private IEnumerator OnParticleCollision(Collision col)
-       // {
-
-        //}
-        public void Reset()
-        {
-            m_Exploded = false;
         }
     }
 }

@@ -8,36 +8,32 @@ namespace Assets.Scripts.BaseClasses
 {
     abstract class BaseBomb : MonoBehaviour
     {
-        protected float explosionTimer; //запускается несколько отсчетов!!! ПОФИКСИТЬ!!!!!!
+        protected float explosionTimer; 
         protected int explosionRadius;
         protected bool ExposionFlag = true;
-
+        public AudioClip fusionSound;
+        public AudioClip explosionSound;
+        protected const float soundVolume = 0.5f;
+        protected AudioSource source;
         protected abstract void SetStartParameters();
 
         protected void Start()
         {
+            source = GetComponent<AudioSource>();
+            source.PlayOneShot(fusionSound, soundVolume);
             SetStartParameters();
             StartExplosion();
         }
-        /*protected void DestroyAllObjectsOnLine(Vector3 transformPositions, Vector3 targetPositions) //таргет через форвард
-        {
-            RaycastHit[] hits = Physics.RaycastAll(transformPositions, targetPositions, explosionRadius);
-            foreach(RaycastHit hit in hits)
-                if ((hit.collider.gameObject.tag != "UnbreakingCube")&&(hit.collider.gameObject.tag != "Bomb"))
-                {
-                   // print("Booom!");
-                    Destroy(hit.collider.gameObject);
-                }
-        }*/
         protected void Update()
         {
-            /*explosionTimer -= Time.deltaTime;
+            explosionTimer -= Time.deltaTime;
             if ((explosionTimer < 0)&&(ExposionFlag))
             {
                 ExposionFlag = false;
-                Explosion();
-
-            }*/
+                source.PlayOneShot(explosionSound, soundVolume);
+                Destroy(this.gameObject, 1);
+                //gameObject.SetActive(false);
+            }
         }
         protected Vector3 SetTargetPosition(Vector3 transformPosition, float x, float y, float z)
         {
@@ -49,21 +45,10 @@ namespace Assets.Scripts.BaseClasses
         protected void StartExplosion()
         {
             BaseExplosion.MainExplosionEvent(transform.position,explosionTimer,explosionRadius);
-            //DestroyAllObjectsOnLine(transform.position, Vector3.forward);
-            //DestroyAllObjectsOnLine(transform.position, Vector3.right);
-            //DestroyAllObjectsOnLine(transform.position, Vector3.back);
-            //DestroyAllObjectsOnLine(transform.position, Vector3.left);
-
-            //checkPlayersInsideExposion();
-            Destroy(this.gameObject,explosionTimer);
         }
-        /*protected void checkPlayersInsideExposion()
+        private void OnDestroy()
         {
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
-            if(player!=null)
-                if (player.transform.position == this.transform.position)
-                    player.gameObject.active = false;
-        }*/
+        }
     }
 
 }

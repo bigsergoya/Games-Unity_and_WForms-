@@ -10,8 +10,7 @@ namespace Assets
     {
         protected GameObject GetBreakingWallPrefab()
         {
-            return Instantiate(Resources.Load("BreakabbleCube", typeof(GameObject))) as GameObject;
-            //return Instantiate(Resources.Load("Prefab/Resources/BreakabbleCube")) as GameObject;
+            return Instantiate(Resources.Load("BreakabbleCube", typeof(GameObject))) as GameObject;            
         }
         protected GameObject GetUnbreakingWallPrefab()
         {

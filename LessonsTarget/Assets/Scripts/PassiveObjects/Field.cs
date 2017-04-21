@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts;
+using Assets.Scripts.ActiveObjects;
 using Assets.Scripts.Bonuses;
 using Assets.Scripts.PassiveObjects;
 using System;
@@ -85,8 +86,7 @@ namespace Assets
             countOfBreakingWalls--;
         }
         void PlaceBreakingWalls()
-        { //Нужно перемешать только пустые клетки!!!!
-            //List<Square> emptySquares = new List<Square>();
+        { 
             List<Square> emptySquares = new List<Square>();
             emptySquares.AddRange(squares.FindAll(sq => sq.SquareType.Equals(Square.type.Empty)));
             ListExtensions.Shuffle<Square>(emptySquares);
@@ -106,11 +106,17 @@ namespace Assets
             squares.Find(sq => sq.Equals(playerPos)).SquareType = Square.type.Player;
             player = new Player(playerPos.I, playerPos.J);
         }
-        void PlaceEnemy()
+        void PlaceSimpleEnemy()
         {
             Square enemyPos = squares.Find(sq => sq.SquareType.Equals(Square.type.Empty));
             squares.Find(sq => sq.Equals(enemyPos)).SquareType = Square.type.Enemy;
             SimpleEnemy enemy = new SimpleEnemy(enemyPos.I, enemyPos.J);
+        }
+        void PlaceCleverEnemy()
+        {
+            Square enemyPos = squares.Find(sq => sq.SquareType.Equals(Square.type.Empty));
+            squares.Find(sq => sq.Equals(enemyPos)).SquareType = Square.type.Enemy;
+            CleverEnemy enemy = new CleverEnemy(enemyPos.I, enemyPos.J);
         }
         void PlaceBonusRadius()
         {
@@ -138,17 +144,12 @@ namespace Assets
         }
         public void Create()
         {
-            //var playField = getBreakingWallPrefab();
-            
-            //GameObject GameObjects;
-            
-            
             PlaceUnbreakingWallsAndFloor();
             PlaceBreakingWalls();
             PlacePlayer();
-            PlaceEnemy();
-            PlaceEnemy();
-            //#333333
+            PlaceCleverEnemy();
+            PlaceCleverEnemy();
+
             PlaceBonusRadius();
             PlaceNoClipBonus();
             PlaceBombCountBonus();

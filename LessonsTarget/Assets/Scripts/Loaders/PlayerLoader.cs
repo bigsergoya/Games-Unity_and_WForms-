@@ -8,9 +8,10 @@ namespace Assets.Scripts.Loaders
 {
     abstract class PlayerLoader : MonoBehaviour
     {
-        public static GameObject GetPlayerPrefab() //А можно ли статик юзать в абстрактном классе?
+        public static GameObject GetPlayerPrefab() 
         {
-            return Instantiate(Resources.Load("CowBoy", typeof(GameObject))) as GameObject;
+            return Instantiate(Resources.Load("Cowboy", typeof(GameObject))) as GameObject;
+            //return Instantiate(Resources.Load("AngryPlayer", typeof(GameObject))) as GameObject;
         }
     }
 }

@@ -9,11 +9,11 @@ namespace Assets.Scripts.Loaders
 {
     abstract class ParticleSystemLoader : MonoBehaviour
     {
-        public static ParticleSystem GetActiveObjectDeathExplosion() //Костыль. Лучше бы иначе!
+        public static ParticleSystem GetActiveObjectDeathExplosion() 
         {
             return Instantiate(Resources.Load("Particle System Unit", typeof(ParticleSystem))) as ParticleSystem;
         }
-        public static ParticleSystem GetMainExplosion() //Костыль. Лучше бы иначе!
+        public static ParticleSystem GetMainExplosion() 
         {
             return Instantiate(Resources.Load("Particle System Main", typeof(ParticleSystem))) as ParticleSystem;
         }

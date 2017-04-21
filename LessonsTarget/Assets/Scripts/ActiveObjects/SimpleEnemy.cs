@@ -10,8 +10,6 @@ using UnityEngine;
 
 namespace Assets
 {
-    //Через коллайдер мы понимаем столкновение частиц взрыва с объектами на поле
-    //Также как в примере реализовать взрыв в классе бэйс экспложион.
     class SimpleEnemy : BaseEnemy
     {
         System.Random rnd;
@@ -19,7 +17,7 @@ namespace Assets
         protected override void CreateEnemyModel(float i, float j)
         {
             GameObject gameModelsObject;
-            gameModelsObject = EnemyLoader.GetEnemyPrefab();
+            gameModelsObject = EnemyLoader.GetSimpleEnemyPrefab();
             gameModelsObject.transform.position = new Vector3(i, 1.0f, j);
         }
 
@@ -33,9 +31,16 @@ namespace Assets
         {
             isMoving = false;
             rnd = new System.Random();
+            animationController = GetComponent<Animator>();
+            banMoving = false;
+            source = GetComponent<AudioSource>();
         }
         protected override bool CanExecute()
         {
+            if (banMoving)
+            {
+                return false;
+            }
             if (isMoving)
             {
                 return true;
@@ -62,42 +67,37 @@ namespace Assets
 
             return false;
         }
-        private void Execute()
+        protected override void Execute()
         {
             isMoving = true;
             StartCoroutine(onCoroutine());
         }
-        void Update()
-        {
-            if (CanExecute())
-            {
-                Execute();
-            }
-        }
         IEnumerator onCoroutine()
         {
-            
             //print("Enemy Step");
             transform.position = Vector3.MoveTowards(
                 transform.position,
                 targetPosition, 2f * Time.deltaTime);
             //print(" 2 " + transform.position.z);
-            if (CollisionWithEnemy())
-            {
-                // Дополнить. Убить
-            }
             if (transform.position == targetPosition)
             {
                 isMoving = false;
+                animationController.SetFloat("Speed", 0);
                 //print(" 2 ");
             }
-            yield return new WaitForEndOfFrame();  //или Нуль, подумать.
-                                                   //yield return null;
+            yield return new WaitForEndOfFrame();  
         }
-
         protected override void OnDestroy()
         {
             //BaseExplosion.EnemyDestroyEvent(transform.position);
+        }
+
+        protected override void Die()
+        {
+            source.PlayOneShot(dieSound, soundVolume);
+            animationController.SetTrigger("Die");
+            banMoving = true;
+            gameObject.SetActive(false);
         }
     }
 }

@@ -38,21 +38,13 @@ namespace Assets.Scripts.BaseClasses
             
             explosion.transform.position = position;
 
-            //var xx = explosion.main;
-            //xx.startDelay = 5f;
-
-
-
             foreach (var ob in explosion.GetComponentsInChildren<ParticleSystem>())
             {
-                //explosion.time = 3f;
                 var x = ob.main;
                 x.startDelay = explosionTimer;
                 x.startSpeed = explosionRadius;
                 ob.Play();
-                //sss.startDelay = 1f;
             }
-            //explosion.Play();
             Destroy(explosion.gameObject, explosionTimer+1);
         }
     }
