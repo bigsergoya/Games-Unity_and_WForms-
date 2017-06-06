@@ -174,6 +174,7 @@ namespace Assets.Scripts.ActiveObjects
         {
             AddGameObjectsArrayOnMap(GameObject.FindGameObjectsWithTag("UnbreakingCube"));
             AddGameObjectsArrayOnMap(GameObject.FindGameObjectsWithTag("BreakingCube"));
+            AddGameObjectsArrayOnMap(GameObject.FindGameObjectsWithTag("ExitCube"));
         }
         double CalculatePriceForCurrentCell(int x, int z, int x_1, int z_1)
         {

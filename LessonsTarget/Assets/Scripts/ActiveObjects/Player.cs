@@ -129,7 +129,7 @@ namespace Assets.Scripts
              //print("Step");
              transform.position = Vector3.MoveTowards(
                  transform.position, 
-                 targetPosition, 2f * Time.deltaTime);
+                 targetPosition, currentSpeed * Time.deltaTime);
              //print(" 1 " + transform.position.z);
              Camera.main.transform.position = Vector3.MoveTowards(
                  Camera.main.transform.position,
@@ -189,7 +189,7 @@ namespace Assets.Scripts
                     break;
                 case "Bonus_Speed":
                     source.PlayOneShot(bonusCollideSound, soundVolume);
-                    currentSpeed = 4f;
+                    currentSpeed = 3f;
                     BaseWorkingWithGame.PrintNewScores(scoresForTheBonus);
                     BaseWorkingWithGame.PrintNewSpeed(currentSpeed);
                     break;
