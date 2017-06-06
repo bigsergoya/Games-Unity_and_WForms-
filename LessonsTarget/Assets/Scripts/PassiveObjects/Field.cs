@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts;
 using Assets.Scripts.ActiveObjects;
 using Assets.Scripts.Bonuses;
+using Assets.Scripts.Loaders;
 using Assets.Scripts.PassiveObjects;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using UnityEngine;
 
 namespace Assets
 {
-    class Field : ResourcesLoader
+    class Field : GameObjectLoader
     {
         int length;
         int countOfBreakingWalls;
@@ -71,17 +72,17 @@ namespace Assets
         }
         void CreateFloor(int i, int j)
         {
-            currentGameObject = GetFieldPrefab();
+            currentGameObject = GetObjectsPrefabByName("FieldPlane");
             currentGameObject.transform.position = new Vector3(i, 0.0f, j);
         }
         void CreateUnbreakingWall(int i, int j)
         {
-            currentGameObject = GetUnbreakingWallPrefab();
+            currentGameObject = GetObjectsPrefabByName("UnbreakeabbleCube");
             currentGameObject.transform.position = new Vector3(i, 0.5f, j);
         }
         void CreateBreakingWall(int i, int j)
         {
-            currentGameObject = GetBreakingWallPrefab();
+            currentGameObject = GetObjectsPrefabByName("BreakabbleCube");
             currentGameObject.transform.position = new Vector3(i, 0.5f, j);
             countOfBreakingWalls--;
         }
@@ -102,58 +103,78 @@ namespace Assets
         }
         void PlacePlayer()
         {
-            playerPos = squares.Find(sq => sq.SquareType.Equals(Square.type.Empty));
-            squares.Find(sq => sq.Equals(playerPos)).SquareType = Square.type.Player;
+            //playerPos = squares.Find(sq => sq.SquareType.Equals(Square.type.Empty));
+            //squares.Find(sq => sq.Equals(playerPos)).SquareType = Square.type.Player;
+            playerPos = GetEmptyFieldCell(Square.type.Player);
             player = new Player(playerPos.I, playerPos.J);
         }
         void PlaceSimpleEnemy()
         {
-            Square enemyPos = squares.Find(sq => sq.SquareType.Equals(Square.type.Empty));
-            squares.Find(sq => sq.Equals(enemyPos)).SquareType = Square.type.Enemy;
+            //Square enemyPos = squares.Find(sq => sq.SquareType.Equals(Square.type.Empty));
+            //squares.Find(sq => sq.Equals(enemyPos)).SquareType = Square.type.Enemy;
+            Square enemyPos = GetEmptyFieldCell(Square.type.Enemy);
             SimpleEnemy enemy = new SimpleEnemy(enemyPos.I, enemyPos.J);
         }
         void PlaceCleverEnemy()
         {
-            Square enemyPos = squares.Find(sq => sq.SquareType.Equals(Square.type.Empty));
-            squares.Find(sq => sq.Equals(enemyPos)).SquareType = Square.type.Enemy;
+            //Square enemyPos = squares.Find(sq => sq.SquareType.Equals(Square.type.Empty));
+            //squares.Find(sq => sq.Equals(enemyPos)).SquareType = Square.type.Enemy;
+            Square enemyPos = GetEmptyFieldCell(Square.type.Enemy);
             CleverEnemy enemy = new CleverEnemy(enemyPos.I, enemyPos.J);
         }
         void PlaceBonusRadius()
         {
-            Square BonusPos = squares.Find(sq => sq.SquareType.Equals(Square.type.Empty));
-            squares.Find(sq => sq.Equals(BonusPos)).SquareType = Square.type.Bonus;
+            //Square BonusPos = squares.Find(sq => sq.SquareType.Equals(Square.type.Empty));
+            //squares.Find(sq => sq.Equals(BonusPos)).SquareType = Square.type.Bonus;
+            Square BonusPos = GetEmptyFieldCell(Square.type.Bonus);
             BonusBombRadius bonus = new BonusBombRadius(BonusPos.I, BonusPos.J);
         }
         void PlaceNoClipBonus()
         {
-            Square BonusPos = squares.Find(sq => sq.SquareType.Equals(Square.type.Empty));
-            squares.Find(sq => sq.Equals(BonusPos)).SquareType = Square.type.Bonus;
+            //Square BonusPos = squares.Find(sq => sq.SquareType.Equals(Square.type.Empty));
+            //squares.Find(sq => sq.Equals(BonusPos)).SquareType = Square.type.Bonus;
+            Square BonusPos = GetEmptyFieldCell(Square.type.Bonus);
             BonusNoClip bonus = new BonusNoClip(BonusPos.I, BonusPos.J);
         }
         void PlaceBombCountBonus()
         {
-            Square BonusPos = squares.Find(sq => sq.SquareType.Equals(Square.type.Empty));
-            squares.Find(sq => sq.Equals(BonusPos)).SquareType = Square.type.Bonus;
+            //Square BonusPos = squares.Find(sq => sq.SquareType.Equals(Square.type.Empty));
+            //squares.Find(sq => sq.Equals(BonusPos)).SquareType = Square.type.Bonus;
+            Square BonusPos = GetEmptyFieldCell(Square.type.Bonus);
             BonusBombCount bonus = new BonusBombCount(BonusPos.I, BonusPos.J);
         }
         void PlaceSpeedBonus()
         {
-            Square BonusPos = squares.Find(sq => sq.SquareType.Equals(Square.type.Empty));
-            squares.Find(sq => sq.Equals(BonusPos)).SquareType = Square.type.Bonus;
+            //Square BonusPos = squares.Find(sq => sq.SquareType.Equals(Square.type.Empty));
+            //squares.Find(sq => sq.Equals(BonusPos)).SquareType = Square.type.Bonus;
+            Square BonusPos = GetEmptyFieldCell(Square.type.Bonus);
             BonusSpeed bonus = new BonusSpeed(BonusPos.I, BonusPos.J);
+        }
+        void PlaceExitCube()
+        {
+            //Square BonusPos = squares.Find(sq => sq.SquareType.Equals(Square.type.Empty));
+            //squares.Find(sq => sq.Equals(BonusPos)).SquareType = Square.type.Bonus;
+            Square BonusPos = GetEmptyFieldCell(Square.type.Exit);
+            ExitCube bonus = new ExitCube(BonusPos.I, BonusPos.J);
+        }
+        Square GetEmptyFieldCell(Square.type typeOfCell)
+        {
+            Square CellPos = squares.Find(sq => sq.SquareType.Equals(Square.type.Empty));
+            squares.Find(sq => sq.Equals(CellPos)).SquareType = typeOfCell;
+            return CellPos;
         }
         public void Create()
         {
             PlaceUnbreakingWallsAndFloor();
             PlaceBreakingWalls();
             PlacePlayer();
+            //PlaceCleverEnemy();
             PlaceCleverEnemy();
-            PlaceCleverEnemy();
-
             PlaceBonusRadius();
             PlaceNoClipBonus();
             PlaceBombCountBonus();
             PlaceSpeedBonus();
+            PlaceExitCube();
         }
         private void PlaceUnbreakingWallsAndFloor()
         {

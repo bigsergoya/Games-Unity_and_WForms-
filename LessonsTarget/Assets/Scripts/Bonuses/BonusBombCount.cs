@@ -16,7 +16,7 @@ namespace Assets.Scripts.Bonuses
         }
         protected override void PlaceBonus(float x, float z)
         {
-            GameObject gameModelsObject = BonusLoader.GetBombCountBonus();
+            GameObject gameModelsObject = GameObjectLoader.GetObjectsPrefabByName("Bonus_BombCount");
             gameModelsObject.transform.position = new Vector3(x, 1.0f, z);
         }
     }

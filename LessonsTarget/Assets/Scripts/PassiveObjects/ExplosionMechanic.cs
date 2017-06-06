@@ -11,27 +11,33 @@ namespace Assets.Scripts.PassiveObjects
 {
     class ExplosionMechanic : MonoBehaviour
     {
-
+        const int scoresForExplodedObject = 5;
         private void Start()
         {
             
         }
         bool ObjectCanBeExploded(string tag)
         {
-            return ((tag != "UnbreakingCube") 
+            /*return ((tag != "UnbreakingCube") 
                 && (tag != "FieldCell") 
                     && (tag != "Player")
                         && (tag != "Enemy")
-                            && (tag != "Bomb"));
+                            && (tag != "Bomb")
+                                && (tag != "ExitCube"));*/
+            return ((tag == "BreakingCube")
+                ||(tag == "Bonus_BombCount") 
+                    || (tag == "Bonus_Radius")
+                        || (tag == "Bonus_NoClip")
+                            || (tag == "Bonus_Speed"));
         }
         private IEnumerator OnParticleCollision(GameObject otherObject)
         {
-            //print("Hit");
             if (enabled)
                 if (ObjectCanBeExploded(otherObject.tag))
                 {
                     BaseExplosion.ObjectDestroyEvent(otherObject.transform.position);
                     Destroy(otherObject.gameObject);
+                    BaseWorkingWithGame.PrintNewScores(scoresForExplodedObject);
                 }
             yield return null;
         }

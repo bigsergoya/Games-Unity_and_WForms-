@@ -9,13 +9,9 @@ namespace Assets.Scripts.Loaders
 {
     abstract class ParticleSystemLoader : MonoBehaviour
     {
-        public static ParticleSystem GetActiveObjectDeathExplosion() 
+        public static ParticleSystem GetExplosionByName(string objectName)
         {
-            return Instantiate(Resources.Load("Particle System Unit", typeof(ParticleSystem))) as ParticleSystem;
-        }
-        public static ParticleSystem GetMainExplosion() 
-        {
-            return Instantiate(Resources.Load("Particle System Main", typeof(ParticleSystem))) as ParticleSystem;
+            return Instantiate(Resources.Load(objectName, typeof(ParticleSystem))) as ParticleSystem;
         }
     }
 }

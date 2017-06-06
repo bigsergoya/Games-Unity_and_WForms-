@@ -11,6 +11,7 @@ namespace Assets.Scripts.BaseClasses
         protected abstract void CreateEnemyModel(float i, float j);
         protected abstract bool CanExecute();
         protected abstract void Execute();
+        protected const int scoresForTheEnemy = 50;
         public AudioClip battlyCry;
         protected void CollisionWithEnemy()
         {
@@ -35,7 +36,8 @@ namespace Assets.Scripts.BaseClasses
         }
         protected void OnParticleCollision(GameObject other)
         {
-            Die();
+            BaseWorkingWithGame.PrintNewScores(scoresForTheEnemy);
+            Die();            
         }
 
         protected override void CreateModel(float i, float j)

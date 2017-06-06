@@ -9,7 +9,7 @@ namespace Assets.Scripts
     {
         int i;
         int j;
-        public enum type {Breaking, Unbreaking, Player, Enemy, Empty, Bonus}; 
+        public enum type {Breaking, Unbreaking, Player, Enemy, Empty, Bonus, Exit}; 
         type squareType;
         public int I
         {

@@ -17,7 +17,7 @@ namespace Assets
         protected override void CreateEnemyModel(float i, float j)
         {
             GameObject gameModelsObject;
-            gameModelsObject = EnemyLoader.GetSimpleEnemyPrefab();
+            gameModelsObject = GameObjectLoader.GetObjectsPrefabByName("KindSkeleton");
             gameModelsObject.transform.position = new Vector3(i, 1.0f, j);
         }
 

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Scripts
 {
@@ -27,8 +28,9 @@ namespace Assets.Scripts
             RaycastHit hit;
             if (Physics.Linecast(transformPositions, targetPositions, out hit))
             {
-                if ((hit.collider.gameObject.tag == "UnbreakingCube") ||
-                    (hit.collider.gameObject.tag == "BreakingCube"))
+                if ((hit.collider.gameObject.tag == "UnbreakingCube") 
+                    || (hit.collider.gameObject.tag == "BreakingCube")
+                        || (hit.collider.gameObject.tag == "ExitCube"))
                 {
                     //print("No way man!");
                     return true;

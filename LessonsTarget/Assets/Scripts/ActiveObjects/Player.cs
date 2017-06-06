@@ -6,21 +6,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Scripts
 {
     public class Player : BaseActiveModels
     {
+        const int scoresForTheBonus = 10;
         float currentSpeed;
         int bombCount;  //10 max
         bool isNoClip;  
         bool bombPower; //6 max
         public AudioClip bonusCollideSound;
         Camera curCam;
-
+        //int scores;
         protected override void CreateModel(float i, float j)
         {
-            GameObject gameModelsObject = PlayerLoader.GetPlayerPrefab();
+            GameObject gameModelsObject = GameObjectLoader.GetObjectsPrefabByName("Cowboy");
             gameModelsObject.transform.position = new Vector3(i, 0.5f, j);
         }
         public Player(float i, float j)
@@ -35,10 +37,10 @@ namespace Assets.Scripts
             { 
                 GameObject gameModelsObject;
                 if (!bombPower) { 
-                    gameModelsObject = BombLoader.GetSimpleBomb();
+                    gameModelsObject = GameObjectLoader.GetObjectsPrefabByName("SimpleBomb");
                 }
                 else
-                    gameModelsObject = BombLoader.GetHardBomb();
+                    gameModelsObject = GameObjectLoader.GetObjectsPrefabByName("HardBomb");
                 gameModelsObject.transform.position = new Vector3(i, 1.0f, j);
                 animationController.SetTrigger("PlantABomb");
             }
@@ -48,13 +50,14 @@ namespace Assets.Scripts
         {
             curCam = gameObject.GetComponent("Main Camera") as Camera;
             isMoving = false;
-            currentSpeed = 1.5f ;
+            currentSpeed = 2f ;
             bombCount = 1;  //10 max
             isNoClip = false;
             bombPower = false; //6 max
             animationController = GetComponent<Animator>();
             banMoving = false;
             source = gameObject.GetComponentInChildren<AudioSource>();
+            
         }
         protected override bool IsCollisionWithWallOrCube(Vector3 transformPositions, Vector3 targetPositions)
         {
@@ -174,25 +177,33 @@ namespace Assets.Scripts
             switch (other.tag)
             {
                 case "Enemy":
-                    //Destroy(this.gameObject);
+                    BaseWorkingWithGame.PrintEndOfTheGameMessage();
                     becomeDead();
                     break;
                 case "Bonus_Radius":
                     source.PlayOneShot(bonusCollideSound, soundVolume); 
                     //bombCount = (bombCount <= 10) ? ++bombCount : 10;
                     bombPower = true;
+                    BaseWorkingWithGame.PrintNewBombsPower(2);
+                    BaseWorkingWithGame.PrintNewScores(scoresForTheBonus);
                     break;
                 case "Bonus_Speed":
                     source.PlayOneShot(bonusCollideSound, soundVolume);
-                    currentSpeed = 3.5f;
+                    currentSpeed = 4f;
+                    BaseWorkingWithGame.PrintNewScores(scoresForTheBonus);
+                    BaseWorkingWithGame.PrintNewSpeed(currentSpeed);
                     break;
                 case "Bonus_NoClip":
                     source.PlayOneShot(bonusCollideSound, soundVolume);
                     isNoClip = true;
+                    BaseWorkingWithGame.PrintNewScores(scoresForTheBonus);
+                    BaseWorkingWithGame.PrintNewWallsStatus("Inactive");
                     break;
                 case "Bonus_BombCount":
                     source.PlayOneShot(bonusCollideSound, soundVolume);
                     bombCount = (bombCount <= 6) ? bombCount+1 : 6;
+                    BaseWorkingWithGame.PrintNewScores(scoresForTheBonus);
+                    BaseWorkingWithGame.PrintNewBombsCount(bombCount);
                     break;
                 default:
                     break;
@@ -201,6 +212,7 @@ namespace Assets.Scripts
 
         private void OnParticleCollision(GameObject other)
         {
+            BaseWorkingWithGame.PrintEndOfTheGameMessage();
             becomeDead();
         }
         protected override void OnDestroy()
