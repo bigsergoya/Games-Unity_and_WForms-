@@ -57,9 +57,9 @@ namespace Assets.Scripts
         protected Vector3 SetTargetPosition(Vector3 transformPosition, Vector3 target)
         {
             return new Vector3(
-                transformPosition.x + target.x,
-                transformPosition.y + target.y,
-                transformPosition.z + target.z);
+                Mathf.Round(transformPosition.x) + target.x,
+                Mathf.Round(transformPosition.y) + target.y,
+                Mathf.Round(transformPosition.z) + target.z);
         }
         protected void PlaceModel(float i, float j)
         {
@@ -77,7 +77,7 @@ namespace Assets.Scripts
                     if ((this.transform.eulerAngles.y < 0) || (this.transform.eulerAngles.y > 1))
                     {
                         this.transform.Rotate(this.transform.rotation.x,
-                            0 - this.transform.eulerAngles.y,
+                            Mathf.Round(0.0f - this.transform.eulerAngles.y),
                             this.transform.rotation.z
                             );
                     }
@@ -86,7 +86,7 @@ namespace Assets.Scripts
                     if ((this.transform.eulerAngles.y < 179) || (this.transform.eulerAngles.y > 181))
                     {
                         this.transform.Rotate(this.transform.rotation.x,
-                        180 - this.transform.eulerAngles.y,
+                        Mathf.Round(180.0f - this.transform.eulerAngles.y),
                         this.transform.rotation.z
                         );
                     }
@@ -95,18 +95,16 @@ namespace Assets.Scripts
                     if ((this.transform.eulerAngles.y < 269) || (this.transform.eulerAngles.y > 271))
                     {
                         this.transform.Rotate(this.transform.rotation.x,
-                        270 - this.transform.eulerAngles.y,
-                        this.transform.rotation.z
-                        );
+                        Mathf.Round(270.0f - this.transform.eulerAngles.y),
+                        this.transform.rotation.z);
                     }
                     break;
                 case directionType.Right:
                     if ((this.transform.eulerAngles.y < 89) || (this.transform.eulerAngles.y > 91))
                     {
                         this.transform.Rotate(this.transform.rotation.x,
-                    90 - this.transform.eulerAngles.y,
-                    this.transform.rotation.z
-                    );
+                    Mathf.Round(90.0f - this.transform.eulerAngles.y),
+                    this.transform.rotation.z);
                     }
                     break;
                 default:

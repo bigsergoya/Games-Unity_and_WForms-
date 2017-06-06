@@ -26,7 +26,7 @@ public class FieldGenerator : MonoBehaviour {
 	void Update () {
         if (Input.GetKey(KeyCode.R))
         {
-            string[] tagsOfDeletedObjects = { "Player", "Enemy", "Bomb", "FieldCell", "ExitCube"
+            string[] tagsOfDeletedObjects = { "Player", "Enemy", "Bomb","BombParth","PS", "FieldCell", "ExitCube"
                 , "BreakingCube", "UnbreakingCube", "Bonus_Radius", "Bonus_Speed", "Bonus_NoClip"
                     , "Bonus_BombCount"};
             BaseWorkingWithGame.DeleteAllObjects(tagsOfDeletedObjects);

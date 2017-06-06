@@ -48,7 +48,7 @@ namespace Assets.Scripts.PassiveObjects
                 //if (comParent.Length>1)
                 {
                     //Destroy(this.gameObject);
-                    string[] tagsOfDeletedObjects = { "Enemy", "Bomb", "Player"};
+                    string[] tagsOfDeletedObjects = { "Enemy", "Bomb", "BombParth", "PS", "Player"};
                     BaseWorkingWithGame.DeleteAllObjects(tagsOfDeletedObjects); //enemies and bombs
                     BaseWorkingWithGame.PrintEndOfTheGameMessage();
                     //PrintEndOfTheGameMarker();

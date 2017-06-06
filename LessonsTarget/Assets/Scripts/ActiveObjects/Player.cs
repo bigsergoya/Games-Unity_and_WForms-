@@ -34,6 +34,7 @@ namespace Assets.Scripts
         protected void PlaceBomb(float i, float j)
         {
             if (GameObject.FindGameObjectsWithTag("Bomb").Length < bombCount)
+            //if (GameObject.find.Length < bombCount)
             { 
                 GameObject gameModelsObject;
                 if (!bombPower) { 

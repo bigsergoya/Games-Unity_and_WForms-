@@ -19,10 +19,12 @@ namespace Assets.Scripts.BaseClasses
             foreach (string tag in tagsOfDeletedObjects)
             {
                 var deletedGameObjects = GameObject.FindGameObjectsWithTag(tag);
-                foreach (GameObject o in deletedGameObjects)
-                {
-                    o.SetActive(false);
-                    Destroy(o);
+                if (deletedGameObjects != null) { 
+                    foreach (GameObject o in deletedGameObjects)
+                    {
+                        o.SetActive(false);
+                        Destroy(o);
+                    }
                 }
             }
         }
