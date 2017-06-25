@@ -1,0 +1,16 @@
+C:\Users\neksta\documents\visual studio 2015\Projects\Test2_SecondTarget\Test2_SecondTarget\bin\Release\Test2_SecondTarget.exe.config
+C:\Users\neksta\documents\visual studio 2015\Projects\Test2_SecondTarget\Test2_SecondTarget\bin\Release\Test2_SecondTarget.exe
+C:\Users\neksta\documents\visual studio 2015\Projects\Test2_SecondTarget\Test2_SecondTarget\bin\Release\Test2_SecondTarget.pdb
+C:\Users\neksta\documents\visual studio 2015\Projects\Test2_SecondTarget\Test2_SecondTarget\obj\Release\Test2_SecondTarget.MainForm.resources
+C:\Users\neksta\documents\visual studio 2015\Projects\Test2_SecondTarget\Test2_SecondTarget\obj\Release\Test2_SecondTarget.csproj.GenerateResource.Cache
+C:\Users\neksta\documents\visual studio 2015\Projects\Test2_SecondTarget\Test2_SecondTarget\obj\Release\Test2_SecondTarget.exe
+C:\Users\neksta\documents\visual studio 2015\Projects\Test2_SecondTarget\Test2_SecondTarget\obj\Release\Test2_SecondTarget.pdb
+C:\Users\neksta\Documents\Visual Studio 2015\Projects\Test2_SecondTarget\Test2_SecondTarget\obj\Release\Test2_SecondTarget.csprojResolveAssemblyReference.cache
+C:\GitHubRep\SecondTarget\Test2_SecondTarget\bin\Release\Test2_SecondTarget.exe.config
+C:\GitHubRep\SecondTarget\Test2_SecondTarget\obj\Release\Test2_SecondTarget.exe
+C:\GitHubRep\SecondTarget\Test2_SecondTarget\obj\Release\Test2_SecondTarget.pdb
+C:\GitHubRep\SecondTarget\Test2_SecondTarget\bin\Release\Test2_SecondTarget.exe
+C:\GitHubRep\SecondTarget\Test2_SecondTarget\bin\Release\Test2_SecondTarget.pdb
+C:\GitHubRep\SecondTarget\Test2_SecondTarget\obj\Release\Test2_SecondTarget.csprojResolveAssemblyReference.cache
+C:\GitHubRep\SecondTarget\Test2_SecondTarget\obj\Release\Test2_SecondTarget.MainForm.resources
+C:\GitHubRep\SecondTarget\Test2_SecondTarget\obj\Release\Test2_SecondTarget.csproj.GenerateResource.Cache

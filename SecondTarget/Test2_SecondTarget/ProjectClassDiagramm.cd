@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Test2_SecondTarget.LogicalCell" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAAAAAEAAAAAAAQAAAAEAAAAAIAAAACAAE=</HashCode>
+      <FileName>Cells\LogicalCell.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Test2_SecondTarget.Controller" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAEAACAAAAAAABAQAAAAAAAAA=</HashCode>
+      <FileName>Controller\Controller.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Test2_SecondTarget.CustomControll" Collapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AECAAgAAAAQBBAGAAAEAAAAMAJAAFAgAYAAAQBACgAA=</HashCode>
+      <FileName>CustomPanel\CustomControll.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Test2_SecondTarget.GameField" Collapsed="true">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>MAgAAAAAABAAAYAAAAAQAAACAAACAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>GameField.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Test2_SecondTarget.LayoutCell" Collapsed="true">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAIAAAAAAAAAAAAgAAAAIAAAAAAAAAAAACQAAAAk=</HashCode>
+      <FileName>Cells\LayoutCell.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Test2_SecondTarget.MainForm" Collapsed="true">
+    <Position X="2.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAACCAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MainForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Test2_SecondTarget.OpenResult" Collapsed="true">
+    <Position X="4" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAggAAAAAAAAAAAAACAAAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>OpenResult.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Test2_SecondTarget.Position" Collapsed="true">
+    <Position X="2.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAgAoAAAACAACAAIAAAAIAAAAAYAA=</HashCode>
+      <FileName>Position.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Test2_SecondTarget.Program" Collapsed="true">
+    <Position X="4" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Test2_SecondTarget.StandartMechanics" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAkAAAAAAAKAAAAAQEAACIgADgAAAAAAAAAAEAAA=</HashCode>
+      <FileName>GameMechanic\StandartMechanics.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Test2_SecondTarget.CustomPanel.PanelPainter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAABAAAAAAAAAgAAAAAgEAAEAAAA=</HashCode>
+      <FileName>CustomPanel\CustomControllPainter\StandartCustomControllPainter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Test2_SecondTarget.CustomPanel.CustomControllViewInfo" Collapsed="true">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>SAAAAAgAACAUAAAAABYAAJESIEABEDAAQSACABQAQgA=</HashCode>
+      <FileName>CustomPanel\CustomControllViewInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Test2_SecondTarget.IController" Collapsed="true">
+    <Position X="0.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAEAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controller\IController.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Test2_SecondTarget.IGameMechanics" Collapsed="true">
+    <Position X="2.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAAAAAAEAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameMechanic\IGameMechanics.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Test2_SecondTarget.ICustomControllPainter" Collapsed="true">
+    <Position X="4" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CustomPanel\CustomControllPainter\ICustomControllPainter.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="Test2_SecondTarget.LayoutCellViewType" Collapsed="true">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAGAAAAAAAQAAAEACAAAA=</HashCode>
+      <FileName>Cells\LayoutCell.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Test2_SecondTarget.Situations" Collapsed="true">
+    <Position X="2.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAEIAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Position.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
