@@ -9,7 +9,7 @@ namespace Test2_SecondTarget.CustomPanel {
     class CustomControllViewInfo {
         CustomControll view;
         LayoutCell[,] cells;
-        Rectangle bounds; //for background
+        Rectangle bounds; 
         Position lastSelectedCellsIndex;
         Position lastPressedCellsIndex;
         bool isDefeated;

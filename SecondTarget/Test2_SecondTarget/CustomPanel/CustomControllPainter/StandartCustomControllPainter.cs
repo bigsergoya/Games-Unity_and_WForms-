@@ -60,7 +60,6 @@ namespace Test2_SecondTarget.CustomPanel {
                         graphics.FillEllipse(Brushes.Green, cell.Boundaries);
                         break;
                     case LayoutCellViewType.Flagged:
-                        //graphics.FillEllipse(Brushes.Blue, cell.Boundaries);
                         graphics.FillPolygon(Brushes.Yellow, CreateTriangle(cell.Boundaries));
                         break;
                 }
