@@ -54,7 +54,8 @@ namespace Test2_SecondTarget.CustomPanel {
                         }
                         break;
                     case LayoutCellViewType.BlowUp:
-                        graphics.FillEllipse(Brushes.Red, cell.Boundaries);
+                        //graphics.FillEllipse(Brushes.Red, cell.Boundaries);
+                        graphics.DrawImage(Properties.Resources.funnyBomb, cell.Boundaries);
                         break;
                     case LayoutCellViewType.FlaggedBomb:
                         graphics.FillEllipse(Brushes.Green, cell.Boundaries);
