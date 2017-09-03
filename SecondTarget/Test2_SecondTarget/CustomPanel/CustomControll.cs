@@ -53,8 +53,8 @@ namespace Test2_SecondTarget {
                             viewInfo.IsWin = true;
                             OpenBombCells(result);
                             ShowMessageAndAskUserForNewActions("Победа. Вы правильно пометили все бомбы. Начать заново?", false);
-                        break;
-                    case Situations.Defeat:
+                            break;
+                        case Situations.Defeat:
                             viewInfo.IsDefeated = true;
                             OpenBombCells(result);
                             ShowMessageAndAskUserForNewActions("Поражение. Вы неправильно пометили все бомбы. Начать заново?", true);
@@ -64,7 +64,6 @@ namespace Test2_SecondTarget {
                             break;
                         default:
                             break;
-
                     }
                 }
             }

@@ -14,3 +14,4 @@ C:\GitHubRep\SecondTarget\Test2_SecondTarget\bin\Debug\Test2_SecondTarget.pdb
 C:\GitHubRep\SecondTarget\Test2_SecondTarget\obj\Debug\Test2_SecondTarget.csprojResolveAssemblyReference.cache
 C:\GitHubRep\SecondTarget\Test2_SecondTarget\obj\Debug\Test2_SecondTarget.MainForm.resources
 C:\GitHubRep\SecondTarget\Test2_SecondTarget\obj\Debug\Test2_SecondTarget.csproj.GenerateResource.Cache
+C:\GitHubRep\SecondTarget\Test2_SecondTarget\obj\Debug\Test2_SecondTarget.Properties.Resources.resources
